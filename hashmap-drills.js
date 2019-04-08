@@ -50,7 +50,7 @@ const WhatDoesThisDo = function(){
   console.log(map2.get(str3));
 };
 //
-console.log('do', WhatDoesThisDo());
+// console.log('do', WhatDoesThisDo());
 // main();
 
 //1) Show your hash map after the insertion of keys 10, 22, 31, 4, 15, 28, 17, 88, 59 
@@ -70,3 +70,84 @@ console.log('do', WhatDoesThisDo());
 // in a string and keep only the first occurrence of each character. 
 // For example, if the input is string “google”, the result after deletion is “gole”. 
 // Test your program with a sentence as well such as "google all that you think can think of".
+
+function removeDuplicates(string){
+  const removeDup = new Map();
+  let ret = '';
+  for(let i=0; i<string.length; i++){
+    if(!removeDup.has(string[i])){
+      removeDup.set(string[i], string[i]);
+      ret+=string[i];
+    }  
+  }
+  // console.log(removeDup._hashTable);
+  return ret;
+}
+
+// console.log(removeDuplicates('google all that you think can think of'));
+
+// 5. Write an algorithm to check whether any permutation of a string is a palindrome. Given the string "acecarr", the algorithm should return true, because the letters in "acecarr" can be rearranged to "racecar", which is a palindrome. In contrast, given the word "north", the algorithm should return false, because there's no way to rearrange those letters to be a palindrome.
+
+function palindrome(string){
+  const hash = new Map();
+  let counter = 0;
+  for(let i=0; i<string.length; i++){
+    if(!hash.has(string[i])){
+      hash.set(string[i], '');
+      counter++;
+    } else if(hash.has(string[i])){
+      counter--;
+    }
+  }
+
+  return string.length%2 && counter === 1 ? true : string.length%2 && counter === 0? true : false;    
+}
+
+// console.log(palindrome('acecarr'));
+
+//6. Write an algorithm to group a list of words into anagrams. For example, if the input was ['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race'], the output should be: [['east', 'teas', 'eats'], ['cars', 'arcs'], ['acre', 'race']].
+
+// function anagrams(arr){
+//    const newArr = [];
+//    for(let i=0; i<arr.length; i++){
+//      let item = arr[i].split('').sort().join();
+//      newArr.push(item); 
+//    }
+
+//    const obj = {}
+//    for(let i=0; i < arr.length; i++){
+//      let temp = arr[i].split('').sort().join();
+//      if(temp === newArr[i]){
+//        if(obj[temp] == null){
+//          obj[temp] = [arr[i]];
+//        }else{
+//          obj[temp].push(arr[i]); 
+//        }
+//      }
+//    }
+  
+//    return Object.values(obj);
+// }
+
+function anagrams(arr){
+  const hash = new Map();
+  const strArr = [];
+  arr.forEach(item => {
+    let sortedItem = item.split('').sort().join('');
+    if(!hash.has(sortedItem)){
+      hash.set(sortedItem, [item]);
+      strArr.push(sortedItem)
+    } else{
+      let items = hash.get(sortedItem);
+      items.push(item);
+      hash.set(sortedItem, items);
+    }
+  })
+
+
+  return strArr.map(item => hash.get(item.split('').sort().join('')));
+}
+
+// console.log(anagrams(['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race']))
+
+
