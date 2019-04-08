@@ -4,7 +4,8 @@ class HashMap {
     this._hashTable = [];
     this._capacity = initialCapacity;
     this._deleted = 0;
-    
+    this.SIZE_RATIO = 3;
+    this.MAX_LOAD_RATIO = 0.5;
   }
   get(key) {// gets key then returns the value
     const index = this._findSlot(key);

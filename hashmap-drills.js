@@ -16,7 +16,7 @@ function main(){
       console.log(`${key}`, lor.get(key));
   });
   console.log('capacity', lor._capacity);
-  console.log('length', lor.length)
+  console.log('length', lor.length);
   console.log('hashtable', lor._hashTable);
   console.log('size ratio', lor.SIZE_RATIO);
 //   Print your hash map and notice the length and items that are hashed in your hash map. Have you hashed all the items you were asked to?
