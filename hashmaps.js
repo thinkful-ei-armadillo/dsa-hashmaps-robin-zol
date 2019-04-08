@@ -17,8 +17,8 @@ class HashMap {
 
   set(key, value){
     const loadRatio = (this.length + this._deleted + 1) / this._capacity;
-    if (loadRatio > HashMap.MAX_LOAD_RATIO) {// compare sizes then if it is more resize the hash
-      this._resize(this._capacity * HashMap.SIZE_RATIO);
+    if (loadRatio > this.MAX_LOAD_RATIO) {// compare sizes then if it is more resize the hash
+      this._resize(this._capacity * this.SIZE_RATIO);// check if current load ratio is hitting the max, if it does then we tripe the size capacity
     }
     //Find the slot where this key should be in
     const index = this._findSlot(key);
