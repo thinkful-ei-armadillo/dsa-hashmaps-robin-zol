@@ -1,4 +1,5 @@
 const {HashMap} = require('./hashmaps');
+const {HashMapChaining} = require('./hash-seperate-chaining');
 
 function main(){
   const lor = new HashMap();
@@ -18,7 +19,7 @@ function main(){
   console.log('capacity', lor._capacity);
   console.log('length', lor.length);
   console.log('hashtable', lor._hashTable);
-  console.log('size ratio', lor.SIZE_RATIO);
+  console.log(lor._hashTable);
 //   Print your hash map and notice the length and items that are hashed in your hash map. Have you hashed all the items you were asked to?
 //  yes but as you have the same key it would overwrite the previous data
 
@@ -36,11 +37,11 @@ const WhatDoesThisDo = function(){
   // both sets of hashmap gives out the last value that it sets because they both have the same key.
   let str1 = 'Hello World.'; 
   let str2 = 'Hello World.'; 
-  let map1 = new HashMap();   [str1, str2]
+  let map1 = new HashMap();   [str1, str2];
   map1.set(str1,10);
   map1.set(str2,20);
 
-  let map2 = new HashMap(); []
+  let map2 = new HashMap(); [];
   let str3 = str1;
   let str4 = str2;
   map2.set(str3,20);
@@ -51,7 +52,7 @@ const WhatDoesThisDo = function(){
 };
 //
 // console.log('do', WhatDoesThisDo());
-// main();
+main();
 
 //1) Show your hash map after the insertion of keys 10, 22, 31, 4, 15, 28, 17, 88, 59 
 // into a hash map of length m = 11 using open addressing and a hash function k mod m.
@@ -136,13 +137,13 @@ function anagrams(arr){
     let sortedItem = item.split('').sort().join('');
     if(!hash.has(sortedItem)){
       hash.set(sortedItem, [item]);
-      strArr.push(sortedItem)
+      strArr.push(sortedItem);
     } else{
       let items = hash.get(sortedItem);
       items.push(item);
       hash.set(sortedItem, items);
     }
-  })
+  });
 
 
   return strArr.map(item => hash.get(item.split('').sort().join('')));
@@ -150,4 +151,17 @@ function anagrams(arr){
 
 // console.log(anagrams(['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race']))
 
+function chaining(){
+  const cm = new HashMapChaining();
+  const lorC = [{'Hobbit': 'Bilbo'}, {'Hobbit': 'Frodo'},
+    {'Wizard': 'Gandolf'}, {'Human': 'Aragon'}, {'Elf': 'Legolas'}, {'Maiar': 'The Necromancer'},
+    {'Maiar': 'Sauron'}, {'RingBearer': 'Gollum'}, {'LadyOfLight': 'Galadriel'}, {'HalfElven': 'Arwen'},
+    {'Ent': 'Treebeard'}];
+  lorC.forEach(obj => { 
+    for(let key in obj)
+      cm.set(key, obj[key]);
+  });
+ console.log(cm._hashTable);
 
+}
+chaining();
