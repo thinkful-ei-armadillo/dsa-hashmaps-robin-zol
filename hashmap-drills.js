@@ -52,7 +52,7 @@ const WhatDoesThisDo = function(){
 };
 //
 // console.log('do', WhatDoesThisDo());
-main();
+// main();
 
 //1) Show your hash map after the insertion of keys 10, 22, 31, 4, 15, 28, 17, 88, 59 
 // into a hash map of length m = 11 using open addressing and a hash function k mod m.
@@ -162,6 +162,6 @@ function chaining(){
       cm.set(key, obj[key]);
   });
  console.log(cm._hashTable);
-
+  console.log('cap', cm._capacity)
 }
 chaining();

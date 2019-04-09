@@ -31,21 +31,30 @@ class HashMapChaining {
     if (loadRatio > this.MAX_LOAD_RATIO) {// compare sizes then if it is more resize the hash
       this._resize(this._capacity * this.SIZE_RATIO);// check if current load ratio is hitting the max, if it does then we tripe the size capacity
     }
-    console.log(key, value);    //Find the slot where this key should be in
+    //Find the slot where this key should be in
     const index = this._findSlot(key);
     
-  
     if(!this._hashTable[index]){
       this.length++; // if nothing is there then adds length
-      this._hashTable[index] = new _hashNode(key, value);
+      this._hashTable[index] = { //reassign
+        key,
+        value,
+        DELETED: false
+      };
     } else {
-      this.head = this._hashTable[index];
-      let tempNode = this.head;
-      while (tempNode.next !== null) 
-        tempNode = tempNode.next;
-      tempNode.next = new _hashNode(key, value);
+      let head = this._hashTable[index]; //grab current head
+      if(head.next === undefined){// if its not a node then make it a node
+        const hashNode = new _hashNode(head.key, head.value);
+        this._hashTable[index] = hashNode;
+        head = this._hashTable[index];
+      }
+      const newNode = new _hashNode(key, value);// add the new value
+      while (head.next !== null) //
+        head = head.next;
+      head.next = newNode;
     }
   }
+  
      
   
   delete(key) {
